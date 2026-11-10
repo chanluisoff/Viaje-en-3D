@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Viaje en 3D</title>
-<link rel="stylesheet" href="css/viaje3d.css?v=f0a8633b">
+<link rel="stylesheet" href="css/viaje3d.css?v=6f01de77">
 </head>
 <body>
 <div id="loader" style="position:fixed;inset:0;z-index:100;background:var(--bg);color:var(--text);font-family:var(--mono);transition:opacity .7s">
@@ -40,7 +40,7 @@
     <section data-sec="fotos" class="on">
       <label class="drop" id="drop" tabindex="0"><b>Agregar fotos</b><span>Hacé clic o arrastrá imágenes acá o sobre la vista previa</span><input type="file" id="fileIn" accept="image/*" multiple hidden></label>
       <div class="row"><div class="lab">Orden del recorrido</div><div class="seg" data-cfg="order"><button data-v="lista">Como en la lista</button><button data-v="fecha">Por fecha</button><button data-v="aleatorio">Aleatorio</button></div></div>
-      <div class="bar"><span class="count" id="count">Sin fotos todavía</span><button class="btn warn" id="clearBtn">Quitar todas las fotos</button></div>
+      <div class="bar"><span class="count" id="count">Sin fotos todavía</span><label class="btn" style="cursor:pointer">Agregar una carpeta<input type="file" id="dirIn" webkitdirectory multiple hidden></label><button class="btn warn" id="clearBtn">Quitar todas las fotos</button></div>
       <p class="hint" style="margin-top:8px">Tocá una miniatura para editar su leyenda o moverla. En la computadora también podés arrastrarla para cambiar el orden.</p>
       <div class="thumbs" id="thumbs"></div>
     </section>
@@ -59,7 +59,7 @@
       <div class="row"><div class="lab">Portal a otro mundo</div><select data-cfg="portal" data-num><option value="0">Nunca</option><option value="1">Con cada foto</option><option value="3">Cada 3 fotos</option><option value="5">Cada 5 fotos</option><option value="8">Cada 8 fotos</option><option value="12">Cada 12 fotos</option></select></div>
       <button class="btn" id="portalTest" style="margin-bottom:6px">Ver el portal en el próximo viaje</button>
       <h2>Integración</h2>
-      <label class="sw-row"><span>Fotos integradas al mundo<small>Carteles en las ciudades, colgadas en el bosque, grabadas en piedra en el desierto.</small></span><input type="checkbox" class="sw" data-cfg="integrate"></label>
+      <label class="sw-row"><span>Fotos integradas al mundo<small>Carteles en las ciudades y colgadas en el bosque.</small></span><input type="checkbox" class="sw" data-cfg="integrate"></label>
           <h2>Mundo Sáenz Peña</h2>
       <label class="sw-row"><span>Recorrido por los lugares emblemáticos<small>La cámara recorre las calles casi reales de Sáenz Peña y pasa despacio frente a sus lugares emblemáticos. Las casas de la familia están siempre incluidas.</small></span><input type="checkbox" class="sw" data-cfg="tour"></label>
       <div class="row"><div class="lab">Lugares por viaje</div><select data-cfg="places" data-num><option value="8">8 lugares</option><option value="12">12 lugares</option><option value="16">16 lugares</option><option value="0">Todos</option></select></div>
@@ -82,10 +82,10 @@
     <section data-sec="viaje">
       <h2 style="margin-top:6px">Recorrido</h2>
       <label class="sw-row"><span>Barra de progreso<small>Una línea finita en el borde de abajo que muestra cuánto falta del recorrido.</small></span><input type="checkbox" class="sw" data-cfg="progress"></label>
-      <label class="sw-row"><span>Recorrido sin fotos<small>Viaja sin tus fotos. En Sáenz Peña se detiene en cada casa y edificio emblemático; en los demás mundos hace paradas breves para mirar el paisaje.</small></span><input type="checkbox" class="sw" data-cfg="spTour"></label>
+      <label class="sw-row"><span>Recorrido sin fotos<small>Viaja sin tus fotos. En Sáenz Peña pasa en cámara lenta frente a cada casa y edificio emblemático, sin detenerse, durante el tiempo en cada parada; en los demás mundos hace paradas breves para mirar el paisaje.</small></span><input type="checkbox" class="sw" data-cfg="spTour"></label>
       <div class="row"><div class="lab">Tiempo en cada parada <output data-out="placeDwell"></output></div><input type="range" data-cfg="placeDwell" min="0.25" max="10" step="0.25"></div>
       <h2>Estilos prearmados</h2>
-      <div class="presets" id="presets"><button data-preset="relax">Relax<small>lento y suave</small></button><button data-preset="aventura">Aventura<small>dron y guía</small></button><button data-preset="vertigo">Vértigo<small>a toda velocidad</small></button></div>
+      <div class="presets" id="presets"><button data-preset="relax">Relax<small>lento y suave</small></button><button data-preset="aventura">Aventura<small>con dron</small></button><button data-preset="vertigo">Vértigo<small>a toda velocidad</small></button></div>
       <h2>Tiempos</h2>
       <div class="row"><div class="lab">Tiempo en cada foto <output data-out="dwell"></output></div><input type="range" data-cfg="dwell" min="0" max="62" step="1"></div>
       <div class="row"><div class="lab">Duración del viaje <output data-out="travel"></output></div><input type="range" data-cfg="travel" min="1.5" max="20" step="0.5"></div>
@@ -113,7 +113,7 @@
       <div class="row"><div class="lab">Encuadre</div><div class="seg" data-cfg="fit"><button data-v="ajustar">Ajustar, se ve completa</button><button data-v="rellenar">Rellenar la pantalla</button></div></div>
       <div class="row"><div class="lab">Filtro</div><div class="seg" data-cfg="filter"><button data-v="ninguno">Original</button><button data-v="bn">Blanco y negro</button><button data-v="sepia">Sepia</button><button data-v="calido">Cálido</button><button data-v="frio">Frío</button><button data-v="vintage">Vintage</button></div></div>
       <label class="sw-row"><span>Reflejo debajo de la foto</span><input type="checkbox" class="sw" data-cfg="reflect"></label>
-      <label class="sw-row" id="rowFloat"><span>Fotos que flotan suavemente<small class="dimnote">No se usa con las fotos de frente ni con las integradas al mundo (carteles, piedras o hilos), para que no se separen de su soporte.</small></span><input type="checkbox" class="sw" data-cfg="float"></label>
+      <label class="sw-row" id="rowFloat"><span>Fotos que flotan suavemente<small class="dimnote">No se usa con las fotos de frente ni con las integradas al mundo (carteles o hilos), para que no se separen de su soporte.</small></span><input type="checkbox" class="sw" data-cfg="float"></label>
       <label class="sw-row"><span>Ver las próximas fotos a lo lejos</span><input type="checkbox" class="sw" data-cfg="ahead"></label>
       <div class="row"><div class="lab">Leyenda</div><div class="seg" data-cfg="caption"><button data-v="ninguna">Ninguna</button><button data-v="nombre">Nombre</button><button data-v="fecha">Fecha</button><button data-v="lugar">Lugar</button><button data-v="completa">Completa</button></div></div>
     </section>
@@ -147,7 +147,7 @@
       <label class="sw-row"><span>Mantener la pantalla encendida<small>Durante el viaje, el celular o la computadora no se bloquean ni apagan la pantalla.</small></span><input type="checkbox" class="sw" data-cfg="awake"></label>
       <div class="row"><div class="lab">Apagado automático</div><select data-cfg="sleep" data-num><option value="0">Desactivado</option><option value="15">A los 15 minutos</option><option value="30">A los 30 minutos</option><option value="60">A la hora</option><option value="90">A la hora y media</option><option value="120">A las 2 horas</option></select></div>
       <h2>Capturas y video</h2>
-      <p class="hint">Durante el viaje: C toma una captura, R empieza o termina la grabación en video y M silencia la música. También tenés botones en pantalla.</p>
+      <p class="hint">Durante el viaje: C toma una captura y M silencia la música; la grabación en video se empieza y se termina desde el panel rápido (Más). También tenés botones en pantalla.</p>
       <button class="btn" id="snapNow">Tomar captura de la vista previa</button>
       <h2>Rendimiento</h2>
       <div class="row"><div class="lab">Rendimiento</div><div class="seg" data-cfg="perf"><button data-v="maximo">Máximo</button><button data-v="equilibrado">Equilibrado</button><button data-v="ahorro">Ahorro</button></div></div>
@@ -206,6 +206,6 @@
 <audio id="audA" preload="auto"></audio><audio id="audB" preload="auto"></audio>
 <script src="js/three.min.js?v=10afce98"></script>
 <script src="js/recursos.js?v=8e81d7bd"></script>
-<script src="js/viaje3d.js?v=9c6e699b"></script>
+<script src="js/viaje3d.js?v=0c949046"></script>
 </body>
 </html>
