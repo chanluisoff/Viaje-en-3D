@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Viaje en 3D</title>
-<link rel="stylesheet" href="css/viaje3d.css?v=37aa1c24">
+<link rel="stylesheet" href="css/viaje3d.css?v=f0a8633b">
 </head>
 <body>
 <div id="loader" style="position:fixed;inset:0;z-index:100;background:var(--bg);color:var(--text);font-family:var(--mono);transition:opacity .7s">
@@ -22,7 +22,7 @@
 <aside>
   <div class="brand">
     <svg width="42" height="42" viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="21" fill="none" stroke="var(--acc)" stroke-width="1.2" opacity=".45"/><path d="M8 30 C 16 8, 30 38, 38 14" fill="none" stroke="var(--acc)" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="30" r="2.6" fill="var(--acc2)"/><circle cx="38" cy="14" r="2.6" fill="var(--acc)"/></svg>
-    <div><h1>Viaje en 3D</h1><p>Tus fotos, unidas por un viaje a través del mundo que elijas.</p></div>
+    <div class="brand-tx"><div class="ttl"><h1>Viaje en 3D</h1><button class="srch-btn" id="srchBtn" title="Buscar en la configuración (Ctrl+F)" aria-label="Buscar en la configuración"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button></div><div class="sub"><p>Tus fotos, unidas por un viaje a través del mundo que elijas.</p><div class="srch" id="srch" hidden><input type="text" id="srchIn" placeholder="Buscar en la configuración" autocomplete="off" spellcheck="false" aria-label="Buscar en la configuración"><span id="srchN" aria-live="polite"></span><button id="srchPrev" title="Anterior (Shift+Enter)" aria-label="Anterior"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button><button id="srchNext" title="Siguiente (Enter)" aria-label="Siguiente"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><button id="srchX" title="Cerrar (Esc)" aria-label="Cerrar el buscador"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div></div>
     <button class="btn menu-close" id="menuClose" aria-label="Cerrar opciones"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>Ver</button>
   </div>
   <nav class="tabs" role="tablist" aria-label="Configuración">
@@ -40,7 +40,7 @@
     <section data-sec="fotos" class="on">
       <label class="drop" id="drop" tabindex="0"><b>Agregar fotos</b><span>Hacé clic o arrastrá imágenes acá o sobre la vista previa</span><input type="file" id="fileIn" accept="image/*" multiple hidden></label>
       <div class="row"><div class="lab">Orden del recorrido</div><div class="seg" data-cfg="order"><button data-v="lista">Como en la lista</button><button data-v="fecha">Por fecha</button><button data-v="aleatorio">Aleatorio</button></div></div>
-      <div class="bar"><span class="count" id="count">Sin fotos todavía</span><button class="btn warn" id="clearBtn">Vaciar</button></div>
+      <div class="bar"><span class="count" id="count">Sin fotos todavía</span><button class="btn warn" id="clearBtn">Quitar todas las fotos</button></div>
       <p class="hint" style="margin-top:8px">Tocá una miniatura para editar su leyenda o moverla. En la computadora también podés arrastrarla para cambiar el orden.</p>
       <div class="thumbs" id="thumbs"></div>
     </section>
@@ -49,7 +49,7 @@
       <p class="hint">El escenario que atravesás entre una foto y la siguiente.</p>
       <div class="cards" id="worldCards"></div>
       <h2>Ambiente</h2>
-      <div class="row"><div class="lab">Hora del día</div><div class="seg" data-cfg="tod"><button data-v="amanecer">Amanecer</button><button data-v="dia">Día</button><button data-v="siesta">Siesta</button><button data-v="atardecer">Atardecer</button><button data-v="noche">Noche</button></div></div>
+      <div class="row"><div class="lab">Hora del día</div><div class="seg" data-cfg="tod"><button data-v="amanecer">Amanecer</button><button data-v="dia">Día</button><button data-v="atardecer">Atardecer</button><button data-v="noche">Noche</button></div></div>
       <div class="row"><div class="lab">Clima</div><div class="seg" data-cfg="weather"><button data-v="ninguno">Despejado</button><button data-v="lluvia">Lluvia</button><button data-v="niebla">Niebla</button><button data-v="nieve">Nieve</button></div></div>
       <label class="sw-row"><span>Partículas flotantes<small>Pétalos, estrellas, burbujas, polvo y demás elementos que flotan en el aire.</small></span><input type="checkbox" class="sw" data-cfg="particles"></label>
       <div class="row"><div class="lab">Cantidad de partículas <output data-out="partAmt"></output></div><input type="range" data-cfg="partAmt" min="1" max="3" step="0.1"></div>
@@ -57,9 +57,7 @@
       <div class="row"><div class="lab">Miradas desde el cielo</div><div class="seg" data-cfg="souls"><button data-v="no">No</button><button data-v="pocos">Pocos</button><button data-v="normal">Normal</button><button data-v="muchos">Muchos</button></div></div>
       <div class="row"><div class="lab">Densidad del mundo <output data-out="density"></output></div><input type="range" data-cfg="density" min="0.3" max="2" step="0.1"></div>
       <div class="row"><div class="lab">Portal a otro mundo</div><select data-cfg="portal" data-num><option value="0">Nunca</option><option value="1">Con cada foto</option><option value="3">Cada 3 fotos</option><option value="5">Cada 5 fotos</option><option value="8">Cada 8 fotos</option><option value="12">Cada 12 fotos</option></select></div>
-      <div class="row"><div class="lab">Estilo del portal</div><select data-cfg="portalStyle"><option value="anillo">Anillo de piedra líquido</option><option value="grieta">Grieta dimensional</option><option value="hiper">Salto hiperespacial</option><option value="chispas">Círculo de chispas</option><option value="mercurio">Espejo de mercurio</option><option value="holo">Portal holográfico</option><option value="aleatorio">Aleatorio</option></select></div>
       <button class="btn" id="portalTest" style="margin-bottom:6px">Ver el portal en el próximo viaje</button>
-      <p class="hint">La Siesta vacía las calles y baja las persianas.</p>
       <h2>Integración</h2>
       <label class="sw-row"><span>Fotos integradas al mundo<small>Carteles en las ciudades, colgadas en el bosque, grabadas en piedra en el desierto.</small></span><input type="checkbox" class="sw" data-cfg="integrate"></label>
           <h2>Mundo Sáenz Peña</h2>
@@ -67,14 +65,14 @@
       <div class="row"><div class="lab">Lugares por viaje</div><select data-cfg="places" data-num><option value="8">8 lugares</option><option value="12">12 lugares</option><option value="16">16 lugares</option><option value="0">Todos</option></select></div>
       <label class="sw-row"><span>Calle en la leyenda<small>Suma, junto al número de foto de arriba, la calle por la que vas, por ejemplo «Calle 12».</small></span><input type="checkbox" class="sw" data-cfg="capStreet"></label>
       <label class="sw-row"><span>Escapada a las casas lejanas<small>Solo en el Recorrido por Sáenz Peña. En un momento al azar, un viaje al espacio para visitar las casas de Gustavo, Luis y Alfredo, y la vuelta a la ciudad.</small></span><input type="checkbox" class="sw" data-cfg="spEscape"></label>
-      <label class="sw-row"><span>Vuelo de presentación<small>Al empezar, después del título, un vuelo sobre la ciudad de norte a sur: gira sobre el Cementerio, frena en algunos lugares, da la vuelta en la rotonda de la Ruta 16 y aterriza frente al arco de bienvenida. Se pausa con la barra espaciadora.</small></span><input type="checkbox" class="sw" data-cfg="spIntro"></label>
-      <div class="row"><div class="lab">Duración del vuelo</div><select data-cfg="spIntroDur" data-num><option value="16">16 s</option><option value="24">24 s</option><option value="32">32 s</option></select></div>
+      <label class="sw-row"><span>Vuelo de presentación<small>Al empezar, un dron despega de la rotonda de la Ruta 16, sigue la calle 12 hacia el norte con curvas suaves (cada vuelo es distinto), pasa frente a la Catedral y le da una vuelta a la manzana de la Plaza San Martín mirándola, sigue hasta el Cementerio y baja frente a él, donde empieza el viaje. Se pausa con la barra espaciadora.</small></span><input type="checkbox" class="sw" data-cfg="spIntro"></label>
+      
     </section>
 
     <section data-sec="camino">
       <div class="row" style="margin-top:4px"><div class="lab">Encuentro con cada foto</div><div class="seg" data-cfg="approach"><button data-v="frente">De frente, y sigue por arriba o por abajo</button><button data-v="costado">Al costado del camino</button></div></div>
       <p class="hint">De frente: la foto espera en medio del camino; al seguir, la cámara pasa por encima o por debajo al azar. En Sáenz Peña las fotos quedan al costado, sobre la vereda.</p>
-      <h2>Forma del camino</h2>
+      <h2>Tipo de camino</h2>
       <div class="cards" id="pathCards"></div>
       <div class="row"><div class="lab">Distancia entre fotos <output data-out="spacing"></output></div><input type="range" data-cfg="spacing" min="0.5" max="2.5" step="0.1"></div>
       <div class="row"><div class="lab">Balanceo de cámara <output data-out="sway"></output></div><input type="range" data-cfg="sway" min="0" max="1" step="0.05"></div>
@@ -89,10 +87,7 @@
       <h2>Estilos prearmados</h2>
       <div class="presets" id="presets"><button data-preset="relax">Relax<small>lento y suave</small></button><button data-preset="aventura">Aventura<small>dron y guía</small></button><button data-preset="vertigo">Vértigo<small>a toda velocidad</small></button></div>
       <h2>Tiempos</h2>
-      <div class="row"><div class="lab">Espera al comenzar el viaje <output data-out="startWait"></output></div><input type="range" data-cfg="startWait" min="0" max="10" step="0.5"></div>
-      <div class="row"><div class="lab">Tiempo en cada foto <output data-out="dwell"></output></div><input type="range" data-cfg="dwell" min="1" max="60" step="1"></div>
-      <div class="row"><div class="lab">Duración total del viaje</div><select data-cfg="totalMin" data-num><option value="0">Libre</option><option value="5">5 min</option><option value="10">10 min</option><option value="15">15 min</option><option value="20">20 min</option><option value="30">30 min</option></select></div>
-      <p class="hint">Con una duración total, el tiempo en cada foto se calcula solo para que el viaje dure lo elegido (entre 1 y 60 s por foto). Si el recorrido entre fotos ya lleva más tiempo, se usa el mínimo.</p>
+      <div class="row"><div class="lab">Tiempo en cada foto <output data-out="dwell"></output></div><input type="range" data-cfg="dwell" min="0" max="62" step="1"></div>
       <div class="row"><div class="lab">Duración del viaje <output data-out="travel"></output></div><input type="range" data-cfg="travel" min="1.5" max="20" step="0.5"></div>
       <div class="row"><div class="lab">Variación entre viajes <output data-out="travelVar"></output></div><input type="range" data-cfg="travelVar" min="0" max="1" step="0.05"></div>
       <p class="hint">Los viajes cortos son lentos y cercanos; los largos recorren más distancia y van más rápido.</p>
@@ -100,8 +95,7 @@
       <div class="row"><div class="lab">Sensación de velocidad <output data-out="warp"></output></div><input type="range" data-cfg="warp" min="0" max="1" step="0.05"></div>
       <label class="sw-row"><span>Líneas de velocidad</span><input type="checkbox" class="sw" data-cfg="streaks"></label>
       <h2>Cámara</h2>
-      <div class="row"><div class="seg" data-cfg="cam"><button data-v="primera">Primera persona</button><button data-v="dron">Dron siguiendo al guía</button></div></div>
-      <label class="sw-row"><span>Guía acompañante<small>Cometa, mariposa, pez, pájaro o auto según el mundo.</small></span><input type="checkbox" class="sw" data-cfg="guide"></label>
+      <div class="row"><div class="seg" data-cfg="cam"><button data-v="primera">Primera persona</button><button data-v="dron">Dron</button></div></div>
       <label class="sw-row" id="rowPan"><span>Pausa panorámica<small>En los viajes largos, la cámara mira el paisaje a mitad de camino.</small><small class="dimnote">No se usa con las fotos de frente.</small></span><input type="checkbox" class="sw" data-cfg="panorama"></label>
       <label class="sw-row"><span>Acercamiento lento<small>Efecto Ken Burns mientras mirás cada foto.</small></span><input type="checkbox" class="sw" data-cfg="kenburns"></label>
       <div class="row"><div class="lab">Intensidad del acercamiento <output data-out="kbAmt"></output></div><input type="range" data-cfg="kbAmt" min="0.1" max="1" step="0.05"></div>
@@ -125,8 +119,8 @@
     </section>
 
     <section data-sec="efectos">
-      <div class="row"><div class="lab">Al llegar a cada foto</div><div class="seg" data-cfg="tIn"><button data-v="ninguna">Ninguna</button><button data-v="particulas">Se arma con partículas</button><button data-v="polaroid">Revelado Polaroid</button><button data-v="destello">Destello</button><button data-v="carta">Gira como carta</button><button data-v="vidrio">Vidrio que se une</button><button data-v="tinta">Mancha de tinta</button><button data-v="persianas">Persianas</button><button data-v="mosaico">Mosaico</button><button data-v="glitch">Falla digital</button><button data-v="pagina">Página</button><button data-v="aleatoria">Aleatoria</button></div></div>
-      <div class="row"><div class="lab">Al dejar cada foto</div><div class="seg" data-cfg="tOut"><button data-v="ninguna">Ninguna</button><button data-v="particulas">Se disuelve en partículas</button><button data-v="polaroid">Se desvanece</button><button data-v="destello">Destello</button><button data-v="carta">Gira como carta</button><button data-v="vidrio">Vidrio que se rompe</button><button data-v="tinta">Mancha de tinta</button><button data-v="persianas">Persianas</button><button data-v="mosaico">Mosaico</button><button data-v="glitch">Falla digital</button><button data-v="pagina">Página</button><button data-v="aleatoria">Aleatoria</button></div></div>
+      <div class="row"><div class="lab">Al llegar a cada foto</div><div class="seg" data-cfg="tIn"><button data-v="ninguna">Ninguna</button><button data-v="particulas">Se arma con partículas</button><button data-v="polaroid">Revelado Polaroid</button><button data-v="destello">Destello</button><button data-v="vidrio">Vidrio que se une</button><button data-v="tinta">Mancha de tinta</button><button data-v="persianas">Persianas</button><button data-v="mosaico">Mosaico</button><button data-v="glitch">Falla digital</button><button data-v="aleatoria">Aleatoria</button></div></div>
+      <div class="row"><div class="lab">Al dejar cada foto</div><div class="seg" data-cfg="tOut"><button data-v="ninguna">Ninguna</button><button data-v="particulas">Se disuelve en partículas</button><button data-v="polaroid">Se desvanece</button><button data-v="destello">Destello</button><button data-v="vidrio">Vidrio que se rompe</button><button data-v="tinta">Mancha de tinta</button><button data-v="persianas">Persianas</button><button data-v="mosaico">Mosaico</button><button data-v="glitch">Falla digital</button><button data-v="aleatoria">Aleatoria</button></div></div>
       <h2>Capítulos</h2>
       <p class="hint">Separadores automáticos según la fecha de las fotos.</p>
       <div class="seg" data-cfg="chapters"><button data-v="ninguno">Sin capítulos</button><button data-v="estacion">Por estación</button><button data-v="mes">Por mes</button><button data-v="anio">Por año</button></div>
@@ -143,7 +137,7 @@
       <div class="bar" style="margin-top:0"><span class="count" id="musicCount">Sin música</span><label class="btn" style="cursor:pointer">Agregar temas<input type="file" id="musicIn" accept="audio/*" multiple hidden></label></div>
       <ul class="tracks" id="tracks"></ul>
       <div class="row"><div class="lab">Volumen <output data-out="volume"></output></div><input type="range" data-cfg="volume" min="0" max="1" step="0.05"></div>
-      <div class="bar" style="margin-top:4px"><button class="btn" id="sndTest">Probar sonido</button><button class="btn" id="sndDefault">Volver al tema original</button></div>
+      <div class="bar" style="margin-top:4px"><button class="btn" id="sndDefault">Quitar todos los temas</button></div>
       <div class="store" id="sndInfo" style="display:none"></div>
       <label class="sw-row"><span>Fundido entre temas</span><input type="checkbox" class="sw" data-cfg="crossfade"></label>
       <label class="sw-row"><span>Movimiento al ritmo de la música<small>La escena late con los graves.</small></span><input type="checkbox" class="sw" data-cfg="beat"></label>
@@ -188,10 +182,12 @@
   <div class="overlay stage-bottom"><div class="cap" id="cap"></div><button class="go preview-only" id="goBtn" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>Comenzar viaje</button></div>
   <div class="overlay hud play-only" id="hud">
     <div class="prog" id="prog"></div>
-    <div class="keys" id="hkeys">Clic o Espacio pausa, doble clic sale · Flechas miran alrededor (← y → juntas: atrás) · Coma y punto cambian de foto · F frena · + y − velocidad · AvPág y RePág saltan de lugar · Esc sale</div>
+    <div class="keys" id="hkeys">Clic o Espacio pausa, doble clic sale · Flechas miran alrededor (← y → juntas: atrás) · Coma y punto cambian de foto · F frena · + y − velocidad · AvPág y RePág saltan de lugar · R dirección · C captura · Esc sale</div>
     <div class="ctr">
       <button id="hPrev" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+      <button id="hBack" aria-label="Hacia atrás (R): frena y vuelve por el mismo camino" title="Hacia atrás (R)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
       <button id="hPause" aria-label="Pausar o continuar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+      <button id="hFwd" aria-label="Hacia adelante (R)" title="Hacia adelante (R)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
       <button id="hNext" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
       <button id="hSpeed" class="spd" aria-label="Cambiar la velocidad">1×</button>
       <button id="hQuick" aria-label="Ajustes rápidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
@@ -209,7 +205,7 @@
 <dialog id="dlg"></dialog>
 <audio id="audA" preload="auto"></audio><audio id="audB" preload="auto"></audio>
 <script src="js/three.min.js?v=10afce98"></script>
-<script src="js/recursos.js?v=8726d717"></script>
-<script src="js/viaje3d.js?v=96c0af97"></script>
+<script src="js/recursos.js?v=8e81d7bd"></script>
+<script src="js/viaje3d.js?v=5784a4c4"></script>
 </body>
 </html>
